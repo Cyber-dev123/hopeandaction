@@ -105,6 +105,7 @@ footer a:hover{color:#fff}
     <li><a href="#tips">What We Do</a></li>
     <li><a href="#tipsntricks">Tips & Tricks</a></li>
     <li><a href="#events">Events</a></li>
+    <li><a href="#monthly">Monthly Theme</a></li>
     <li><a href="#choir">Join Choir</a></li>
     <li><a href="#gallery">Gallery</a></li>
   </ul>
@@ -288,6 +289,58 @@ footer a:hover{color:#fff}
     <button onclick="window.location.href='mailto:info@hopeandaction.ca'" style="background:var(--sky-dark);color:#fff;padding:.55rem 1.3rem;border-radius:50px;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap">Share your tip</button>
   </div>
 </section>
+
+<section id="monthly" style="padding:6rem 2rem;background:var(--white);text-align:center">
+  <div style="display:inline-block;background:var(--sun);color:var(--sun-text);padding:.35rem 1.1rem;border-radius:50px;font-size:.8rem;font-weight:700;letter-spacing:.04em;margin-bottom:1.2rem">📅 Monthly Theme</div>
+  <h2 style="font-family:'Lora',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:600;margin-bottom:.8rem;color:var(--text)">This month we're focusing on <em id="theme-name" style="font-style:italic;color:var(--sun-dark)"></em></h2>
+  <p id="theme-desc" style="color:var(--muted);max-width:520px;margin:0 auto 3rem;font-size:1.05rem"></p>
+
+  <div id="theme-activities" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;max-width:900px;margin:0 auto 2.5rem"></div>
+
+  <div id="theme-challenge" style="background:var(--sun);border-radius:20px;padding:1.5rem 2rem;max-width:600px;margin:0 auto;border:1px solid #f0e0cc;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;text-align:left">
+    <div style="font-size:2rem">🏆</div>
+    <div>
+      <div style="font-weight:700;font-size:.95rem;color:var(--text);margin-bottom:.2rem">Monthly Challenge</div>
+      <div id="theme-challenge-text" style="font-size:.88rem;color:var(--muted)"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var themes=[
+    {name:"Fresh Starts",desc:"January is all about new beginnings — the perfect time to reset your relationship with screens and start fresh habits.",color:"var(--sky-dark)",activities:[{icon:"📝",title:"Set a family screen goal",text:"Sit together and decide on one screen rule to try this month."},{icon:"🚶",title:"Daily morning walk",text:"Start each day with a 10 minute walk before touching any devices."},{icon:"📖",title:"Pick a new book",text:"Choose a book you've always wanted to read and start today."},{icon:"🎯",title:"Learn one new skill",text:"Pick something hands-on to learn this month — cooking, drawing, knitting."}],challenge:"Go one full day without any screens this month and write about how it felt!"},
+    {name:"Connection",desc:"February is about love and togetherness — focus on connecting face to face with the people who matter most.",color:"var(--pink-dark, #D6768F)",activities:[{icon:"💌",title:"Write a letter",text:"Write a handwritten letter or card to someone you care about."},{icon:"🍽️",title:"Screen-free dinner",text:"Have at least 5 dinners this month with no phones at the table."},{icon:"🎲",title:"Family game night",text:"Host a board game night with family or friends."},{icon:"🤝",title:"Volunteer together",text:"Find a local community event to attend as a family."}],challenge:"Have a full screen-free evening with your family — cook, talk, play games!"},
+    {name:"Nature & Outdoors",desc:"March is the perfect time to get outside and rediscover the natural world around you.",color:"var(--green-dark)",activities:[{icon:"🌱",title:"Start a garden",text:"Plant some seeds indoors or start a small herb garden on your windowsill."},{icon:"🦋",title:"Nature journal",text:"Keep a journal of plants, birds, and animals you spot outdoors."},{icon:"🥾",title:"Explore a new trail",text:"Find a hiking trail or nature walk nearby you've never tried."},{icon:"☀️",title:"Outdoor reading",text:"Take your book outside and read in the fresh air instead of on a screen."}],challenge:"Spend at least 1 hour outside every day for a whole week!"},
+    {name:"Creativity",desc:"April is about unleashing your imagination — put down the devices and make something with your hands.",color:"var(--lav-dark)",activities:[{icon:"🎨",title:"Art day",text:"Spend an afternoon painting, drawing, or making a collage."},{icon:"🧁",title:"Bake something new",text:"Try a recipe you've never made before — get the kids involved!"},{icon:"✂️",title:"DIY project",text:"Make something useful from scratch — a photo frame, planter, or decoration."},{icon:"🎵",title:"Make music",text:"Sing, hum, drum on pots — make music without any devices."}],challenge:"Create something this month and share it with a friend or family member in person!"},
+    {name:"Mindfulness",desc:"May is about slowing down, breathing, and being present in the moment without distraction.",color:"var(--green-dark)",activities:[{icon:"🧘",title:"Morning stretch",text:"Start each day with 5 minutes of stretching or deep breathing."},{icon:"🌅",title:"Watch a sunrise or sunset",text:"Pick one morning or evening to watch the sky without your phone."},{icon:"📔",title:"Gratitude journal",text:"Write 3 things you're grateful for each day this month."},{icon:"🌿",title:"Mindful walk",text:"Go for a walk and focus only on what you see, hear, and smell."}],challenge:"Meditate or sit quietly for 5 minutes every day for two weeks!"},
+    {name:"Play",desc:"June is all about having fun the old-fashioned way — through physical play, games, and laughter.",color:"var(--sky-dark)",activities:[{icon:"🏃",title:"Outdoor sports day",text:"Organise a family sports day — races, frisbee, football, anything goes!"},{icon:"🫧",title:"Backyard fun",text:"Blow bubbles, play with water, build a fort — embrace your inner child."},{icon:"🎪",title:"Visit a local event",text:"Check out a local fair, market, or community event this month."},{icon:"🤸",title:"Dance party",text:"Put on some music and have a spontaneous living room dance party."}],challenge:"Organise a screen-free playdate for your kids or a fun outing for the whole family!"},
+    {name:"Reading",desc:"July is about diving into great stories and expanding your imagination through books.",color:"var(--lav-dark)",activities:[{icon:"📚",title:"Start a book club",text:"Invite friends or family to read the same book and meet to discuss it."},{icon:"🏖️",title:"Beach or park reading",text:"Take a book to the park, beach, or garden instead of your phone."},{icon:"👶",title:"Read aloud",text:"Read a story aloud to your kids or a younger sibling each night."},{icon:"📰",title:"Try a new genre",text:"Pick a book in a genre you've never tried — biography, mystery, fantasy."}],challenge:"Read for 30 minutes every day this month instead of scrolling!"},
+    {name:"Community",desc:"August is about giving back and connecting with your local community.",color:"var(--green-dark)",activities:[{icon:"🤲",title:"Volunteer",text:"Sign up to volunteer at a local charity, food bank, or community garden."},{icon:"👋",title:"Meet your neighbours",text:"Introduce yourself to a neighbour you don't know yet."},{icon:"🎁",title:"Random acts of kindness",text:"Do one small act of kindness each week — leave a note, bring treats, help someone."},{icon:"🧹",title:"Community clean-up",text:"Organise or join a local park or street clean-up."}],challenge:"Do 5 random acts of kindness this month and keep track in a journal!"},
+    {name:"Learning",desc:"September is back-to-school season — a great time to learn something new offline.",color:"var(--sky-dark)",activities:[{icon:"🔭",title:"Science experiment",text:"Try a fun science experiment at home with everyday household items."},{icon:"🗺️",title:"Explore history",text:"Visit a local museum, heritage site, or historical landmark."},{icon:"🌍",title:"Learn a new language",text:"Try learning 5 words a day in a language you've always wanted to speak."},{icon:"🍳",title:"Cooking class",text:"Teach your kids a recipe or learn to cook a dish from another culture."}],challenge:"Learn one completely new skill offline this month and teach it to someone else!"},
+    {name:"Autumn Adventures",desc:"October is the most beautiful month to get outside — crisp air, colourful leaves, and cozy activities await.",color:"var(--sun-dark)",activities:[{icon:"🍂",title:"Leaf collection",text:"Collect and press autumn leaves — make art or a nature journal with them."},{icon:"🎃",title:"Pumpkin carving",text:"Get creative with pumpkins — carve, paint, or decorate them together."},{icon:"🕯️",title:"Cozy night in",text:"Have a candle-lit evening with hot chocolate, blankets, and board games."},{icon:"🍎",title:"Apple picking",text:"Visit a local farm or orchard for apple or pumpkin picking."}],challenge:"Go on an autumn scavenger hunt and find 10 things from nature!"},
+    {name:"Gratitude",desc:"November is about appreciating what we have and spending quality time with loved ones.",color:"var(--green-dark)",activities:[{icon:"🙏",title:"Gratitude jar",text:"Each day write one thing you're grateful for and put it in a jar to read at month end."},{icon:"📸",title:"Photo album",text:"Print some of your favourite family photos and make a physical album together."},{icon:"🍲",title:"Cook together",text:"Prepare a big family meal together from scratch — no takeaway, no shortcuts!"},{icon:"💬",title:"Tell someone you appreciate them",text:"Tell three people this month exactly why you value them — in person."}],challenge:"Write a thank-you letter to someone who has made a difference in your life!"},
+    {name:"Disconnect to Reconnect",desc:"December is the most important month to put down your devices and be fully present with the people you love.",color:"var(--lav-dark)",activities:[{icon:"🎄",title:"Decorate together",text:"Decorate your home as a family with music, laughter, and no phones."},{icon:"⛄",title:"Winter outdoor fun",text:"Build a snowman, go sledding, or just take a winter walk together."},{icon:"🕯️",title:"Screen-free Christmas Eve",text:"Spend Christmas Eve completely screen-free — games, stories, music."},{icon:"🎁",title:"Handmade gifts",text:"Make at least one handmade gift for someone this December."}],challenge:"Have a completely screen-free Christmas Day and be fully present with your loved ones!"}
+  ];
+
+  var month=new Date().getMonth();
+  var t=themes[month];
+
+  document.getElementById('theme-name').textContent=t.name;
+  document.getElementById('theme-desc').textContent=t.desc;
+  document.getElementById('theme-challenge-text').textContent=t.challenge;
+
+  var grid=document.getElementById('theme-activities');
+  t.activities.forEach(function(a){
+    var div=document.createElement('div');
+    div.style.cssText='background:var(--cream);border-radius:16px;padding:1.5rem;border:1px solid #e4f0e8;text-align:left;transition:transform .2s';
+    div.onmouseover=function(){this.style.transform='translateY(-4px)'};
+    div.onmouseout=function(){this.style.transform='translateY(0)'};
+    div.innerHTML='<div style="font-size:1.6rem;margin-bottom:.6rem">'+a.icon+'</div><div style="font-weight:700;font-size:.95rem;margin-bottom:.4rem;color:var(--text)">'+a.title+'</div><div style="font-size:.85rem;color:var(--muted);line-height:1.6">'+a.text+'</div>';
+    grid.appendChild(div);
+  });
+})();
+</script>
 
 <section id="events" style="padding:4rem 2rem;background:var(--white);text-align:center;border-top:1px solid #e4f0e8">
   <div style="display:inline-block;background:var(--lav);color:var(--lav-text);padding:.35rem 1.1rem;border-radius:50px;font-size:.8rem;font-weight:700;letter-spacing:.04em;margin-bottom:1.2rem">📣 Events</div>
